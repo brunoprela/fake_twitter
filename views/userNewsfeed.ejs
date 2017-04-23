@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Bruno Prela's 6.170 Fritter Part I.">
+    <meta name="keywords" content="Bruno, Prela, Bruno Prela, MIT, Fritter, Twitter, 6.170, JavaScript">
+    <meta name="author" content="Bruno Prela">
+
+    <title>Fritter</title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+    <!-- "Fritter" Logo -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+    <!-- jQuery -->
+    <script src ="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <!-- Custom Script -->
+    <script src ="../js/tweets.js"></script>
+</head>
+
+<body>
+<!-- Navigation Bar -->
+<div class="container center">
+    <h1 style="font-weight:bold; color:deepskyblue"><i class="fa fa-cloud"></i> Fritter</h1>
+    <br><br>
+    <a id="post-nav" href="/tweets/allNewsfeed">Post a Tweet</a> | <a id="my-nav" href="/tweets/myNewsfeed">Manage My Fritter</a> | <a id="logout-nav" href="/">Logout</a>
+</div>
+
+
+<div class="container center">
+    <h4><%= otherUser %>'s Newsfeed</h4>
+    <%if (!isFollowingUser) { %>
+        <button class="follow-submit btn btn-primary" type="button" id=<%= otherUser %>>Follow </button>
+    <% } %>
+
+    <hr noshade="true" width="900px">
+    <% for(var i=0; i<userTweets.length-1; i++) {%>
+
+    <!--<div class="container center">-->
+
+        <!-- Tweet Body -->
+        <%if ((userTweets[i].isUsersTweet && !userTweets[i].retweet)|| userTweets[i].isUsersRetweet || userTweets[i].isFollowing){ %>
+            <!-- Tweet Body -->
+            <%if (userTweets[i].retweet) { %>
+                <h3 style="font-weight:bold; color:deepskyblue"><a href=<%=userTweets[i].userRetweetedName%>>@<%=userTweets[i].userRetweetedName%></a>
+                    <i style="color:black" class="fa fa-retweet"></i><a href=<%=userTweets[i].userAuthoredName%>>@<%=userTweets[i].userAuthoredName%></a></h3>
+                <h3>Time Posted: <%=userTweets[i].time%></h3>
+                <h3><%=userTweets[i].text%></h3>
+                <hr noshade="true" width="400px">
+            <% }
+            else if (!userTweets[i].retweet) { %>
+                <h3 style="font-weight:bold; color:deepskyblue"><a href=<%=userTweets[i].userAuthoredName%>>@<%=userTweets[i].userAuthoredName%></a></h3>
+                <h3>Time Posted: <%=userTweets[i].time%></h3>
+                <h3><%=userTweets[i].text%></h3>
+                <hr noshade="true" width="400px">
+            <% } %>
+        <% } %>
+
+
+    <!--</div>-->
+
+    <% } %>
+</div>
+</body>
+</html>

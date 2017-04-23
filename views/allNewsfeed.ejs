@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description" content="Bruno Prela's 6.170 Fritter Part I.">
+        <meta name="keywords" content="Bruno, Prela, Bruno Prela, MIT, Fritter, Twitter, 6.170, JavaScript">
+        <meta name="author" content="Bruno Prela">
+
+        <title>Fritter</title>
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="../css/style.css">
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+              integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+              crossorigin="anonymous">
+        <!-- "Fritter" Logo -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+        <!-- jQuery -->
+        <script src ="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <!-- Custom Script -->
+        <script src ="../js/tweets.js"></script>
+    </head>
+    <body>
+    <!-- Navigation Bar -->
+    <div class="container center">
+        <h1 style="font-weight:bold; color:deepskyblue"><i class="fa fa-cloud"></i> Fritter</h1>
+        <br>
+        <a id="post-nav" href="/tweets/allNewsfeed">Post a Tweet</a> | <a id="my-nav" href="/tweets/myNewsfeed">Manage My Fritter</a> | <a id="logout-nav" href="/login">Logout</a>
+    </div>
+
+    <!-- Start of Body -->
+    <div class="container center">
+        <h4>What do you have to say <%= username %>?</h4>
+        <br>
+        <!-- Form for posting tweets. -->
+        <form id="tweet-submit-form" class="center" action="/tweets/tweet" method="post">
+            <input type="text" name="tweetText" size="100" maxlength="140" placeholder="Enter your tweet...">
+            <br>
+            <input type="submit" value="Post Tweet">
+        </form>
+    </div>
+
+    <div class="container center">
+        <h4>Your Fritter Newsfeed</h4>
+        <hr noshade="true" width="900px">
+        <br>
+        <% for(var i=0; i<allTweets.length-1; i++) {%>
+            <!-- Tweet Body -->
+            <%if (allTweets[i].retweet) { %>
+                <h3 style="font-weight:bold; color:deepskyblue"><a href=<%=allTweets[i].userRetweetedName%>>@<%=allTweets[i].userRetweetedName%></a>
+                    <i style="color:black" class="fa fa-retweet"></i> <a href=<%=allTweets[i].userAuthoredName%>>@<%=allTweets[i].userAuthoredName%></a></h3>
+                <h3>Time Posted: <%=allTweets[i].time%></h3>
+                <h3><%=allTweets[i].text%></h3>
+                <!-- Tweet Buttons -->
+                <%if ((allTweets[i].isUsersTweet && !allTweets[i].retweet) || allTweets[i].isUsersRetweet) { %>
+                <button class="delete-submit btn btn-danger" type="button" id=<%=allTweets[i].id%> >Delete</button>
+                <% } %>
+                <hr noshade="true" width="400px">
+            <% }
+            else if (!allTweets[i].retweet) { %>
+                <h3 style="font-weight:bold; color:deepskyblue"><a href=<%=allTweets[i].userAuthoredName%>>@<%=allTweets[i].userAuthoredName%></a></h3>
+                <h3>Time Posted: <%=allTweets[i].time%></h3>
+                <h3><%=allTweets[i].text%></h3>
+                <!-- Tweet Buttons -->
+                <%if ((allTweets[i].isUsersTweet && !allTweets[i].retweet) || allTweets[i].isUsersRetweet) { %>
+                <button class="delete-submit btn btn-danger" type="button" id=<%=allTweets[i].id%> >Delete</button>
+                <% } %>
+                <%if (!allTweets[i].isUsersTweet && !allTweets[i].isUsersRetweet && !allTweets[i].retweet) { %>
+                <button class="retweet-submit-all btn btn-success" type="button" id=<%=allTweets[i].id%>>Retweet</button>
+                <% } %>
+                <hr noshade="true" width="400px">
+            <% } %>
+        <% } %>
+    </div>
+    </body>
+</html>

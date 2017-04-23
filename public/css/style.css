@@ -1,0 +1,26 @@
+/* Body */
+body {
+    color: black;
+    background-color: white;
+}
+
+/* Index */
+
+#textboxid
+{
+    height:200px;
+    font-size:14pt;
+}
+
+
+.center {
+    text-align: center;
+    margin: auto;
+    width: 100%;
+    padding: 10px;
+}
+
+/* Footer */
+footer {
+    margin: 50px 0;
+}

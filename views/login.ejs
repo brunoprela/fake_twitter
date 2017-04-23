@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description" content="Bruno Prela's 6.170 Fritter Part I.">
+        <meta name="keywords" content="Bruno, Prela, Bruno Prela, MIT, Fritter, Twitter, 6.170, JavaScript">
+        <meta name="author" content="Bruno Prela">
+
+        <title>Fritter</title>
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="../css/style.css">
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+              integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+              crossorigin="anonymous">
+        <!-- Logo -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+        <!-- jQuery -->
+        <script src ="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <!-- Custom Script -->
+        <script src ="../js/tweets.js"></script>
+    </head>
+
+    <body>
+    <div class="container center">
+        <!-- Information regarding Fritter and username rules. -->
+        <h1 style="font-weight:bold; color:deepskyblue"><i class="fa fa-cloud"></i> Fritter</h1>
+        <h3>Welcome to Fritter!</h3>
+        <hr noshade="true" width="900px">
+        <br>
+
+        <div class="container center">
+            <!-- Login form -->
+            <!--<hr noshade="true" width="400px">-->
+            <h4>Returning user? Log in to start tweeting.</h4>
+            <form id="login-submit-form" class="center" action="/login" method="post">
+                <div>
+                    <input type="text"  name="username" size="25" maxlength="24" placeholder="Enter your username...">
+                </div>
+                <br>
+                <div>
+                    <input type="text"  name="password" size="25" maxlength="24" placeholder="Enter your password...">
+                </div>
+                <br>
+                <input id="login-submit" type="submit" value="Login">
+            </form>
+            <%if (!register) { %>
+                <%if (invalidUser) { %>
+                <br>
+                <h4 style="font-weight:bold; color:red">Invalid username or password. Please try again.</h4>
+                <% } %>
+            <% } %>
+
+            <br>
+
+            <!-- Register form -->
+            <hr noshade="true" width="400px">
+            <h4>New to Fritter? Register as a new user.</h4>
+            <form id="register-submit-form" class="center" action="/register" method="post">
+                <div>
+                    <input type="text"  name="username" size="25" maxlength="24" placeholder="Enter your desired username...">
+                </div>
+                <br>
+                <div>
+                    <input type="text"  name="password" size="25" maxlength="24" placeholder="Set your password...">
+                </div>
+                <br>
+                <input id="register-submit" type="submit" value="Register">
+            </form>
+            <%if (register) { %>
+                <%if (alreadyUser) { %>
+                    <br>
+                    <h4 style="font-weight:bold; color:red">Username is already taken or password is invalid. Please try again.</h4>
+                <% } %>
+            <% } %>
+
+        </div>
+    </div>
+    </body>
+</html>
